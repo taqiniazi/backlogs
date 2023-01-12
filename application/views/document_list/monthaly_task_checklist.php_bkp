@@ -1,0 +1,194 @@
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<style>
+    .table-responsive {
+        overflow-x: hidden;
+    }
+
+    .box-setup .col-xl-3 {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+</style>
+
+
+<div class="row box-setup">
+    <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/labortary_task_checklist'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <!-- <span class="dash-widget-icon"></span> -->
+                    <span class="dash-widget-icon">
+                        <i class="la la-network-wired"></i>
+                    </span>
+                    <div class="dash-widget-info">
+                        <h3><?= $lab_task;  ?></h3>
+                        <span>Laboratory Task Checklist</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/monthaly_stainer_checklist'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon">
+                        <img src="<?php echo base_url(); ?>assets/icons/laboratory_icon.png" class="img-fluid" />
+                    </span>
+                    <div class="dash-widget-info">
+                        <h3><?= $mon_sta;  ?></h3>
+                        <span>Monthly Stainer Checklist</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/monthaly_task_checklist'); ?>">
+            <div class="card dash-widget" style="box-shadow: 4px 4px 4px 4px lightblue;">
+                <div class="card-body">
+                    <span class="dash-widget-icon">
+                        <img src="<?php echo base_url('assets/icons/pathologist.svg'); ?>" class="img-fluid" />
+                    </span>
+                    <div class="dash-widget-info">
+                        <h3></h3>
+                        <span>Monthly Task Checklist</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 
+        <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/improvment_corrective_action_register'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-hospital-o"></i></span>
+                    <div class="dash-widget-info">
+                        <h3><?= $cor_act;  ?></h3>
+                        <span>Non Conformance Form</span>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+         -->
+
+
+
+
+    <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/temperature_logbook'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon">
+                        <img src="<?php echo base_url('assets/icons/pathologist.svg'); ?>" class="img-fluid" />
+                    </span>
+                    <div class="dash-widget-info">
+                        <h3><?= $temp;  ?></h3>
+                        <span>Temperature Log Book</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+</div>
+
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Form</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?php echo base_url('Document_List/forms') ?>">Dashboard / Checklist / Monthly Task Checklist</a></li>
+
+                </ul>
+            </div>
+
+            <!-- <div class="col-auto float-right ml-auto">
+		    <a href="<?php echo base_url('Document_List/category_section/0'); ?>" class="btn add-btn"><i class="fa fa-plus"></i>  Add</a>
+	    </div> -->
+
+
+        </div>
+    </div>
+
+    <div class="notification">
+        <?php if ($this->session->flashdata('message') != '') { ?>
+            <div class="success_list">
+                <?= $this->session->flashdata('message'); ?>
+            </div>
+        <?php } ?>
+        <?php if ($this->session->flashdata('error') != '') { ?>
+            <div class="error_list">
+                <?= $this->session->flashdata('error'); ?>
+            </div>
+        <?php } ?>
+    </div>
+    <!-- <div id="calendar"></div> -->
+
+    <table class="table no-footer">
+        <thead>
+            <tr>
+                <th>January</th>
+                <th>February</th>
+                <th>March</th>
+                <th>April</th>
+                <th>May</th>
+                <th>June</th>
+                <th>July</th>
+                <th>August</th>
+                <th>September</th>
+                <th>October</th>
+                <th>November</th>
+                <th>December</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#add_data_checklist" class="btn btn-primary">Add</a></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="add_data_checklist" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group">
+                    <form method="POST">
+                    <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
+                        <input type="text" name="first_name" id="first-name-input" value="" class="form-control" placeholder="First Name">
+                        <br>
+                        <input type="text" name="last_name" id="first-name-input" value="" class="form-control" placeholder="Lat Name">
+                        <br>
+                        <input type="email" name="email" id="first-name-input" value="" class="form-control" placeholder="Email">
+                        <br>
+                        <button type="submit" class="btn btn-primary" >Save</button>
+
+                    </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

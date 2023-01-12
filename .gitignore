@@ -1,0 +1,11 @@
+application/config/config.php
+application/config/database.php
+
+phpmyadmin/
+.htaccess
+
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+/vendor/
+uploads/email.txt

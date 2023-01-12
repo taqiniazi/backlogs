@@ -1,0 +1,232 @@
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<style>
+    .table-responsive {
+        overflow-x: hidden;
+    }
+    .box-setup .col-xl-3 {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.js"></script>
+
+
+
+<div class="row box-setup">
+         <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+         <a href="<?php echo base_url('Document_List/labortary_task_checklist'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <!-- <span class="dash-widget-icon"></span> -->
+                   <span class="dash-widget-icon">
+                   <i class="la la-network-wired"></i>
+                    </span>
+                    <div class="dash-widget-info">
+                        <h3><?= $lab_task;  ?></h3>
+                        <span>Laboratory Task Checklist</span>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div> 
+        <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/monthaly_stainer_checklist'); ?>">
+            <div class="card dash-widget" style="box-shadow: 4px 4px 4px 4px lightblue;">
+                <div class="card-body">
+                    <span class="dash-widget-icon">
+                        <img src="<?php echo base_url();?>assets/icons/laboratory_icon.png" class="img-fluid"/>
+                    </span>
+                    <div class="dash-widget-info">
+                        <h3><?= $mon_sta;  ?></h3>
+                        <span>Monthly Stainer Checklist</span>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/monthaly_task_checklist'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                <span class="dash-widget-icon">
+                    <img src="<?php echo base_url('assets/icons/pathologist.svg'); ?>" class="img-fluid"/>
+                </span>
+                    <div class="dash-widget-info">
+                        <h3></h3>
+                        <span>Monthly Task Checklist</span>                   
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+
+
+        <!-- <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/improvment_corrective_action_register'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-hospital-o"></i></span>
+                    <div class="dash-widget-info">
+                        <h3><?= $cor_act;  ?></h3>
+                        <span>Non Conformance Form</span>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+         -->
+     
+        
+
+
+        <div class="col-md-6 col-sm-6 col-lg-3 col-xl-3">
+        <a href="<?php echo base_url('Document_List/temperature_logbook'); ?>">
+            <div class="card dash-widget">
+                <div class="card-body">
+                <span class="dash-widget-icon">
+                    <img src="<?php echo base_url('assets/icons/pathologist.svg'); ?>" class="img-fluid"/>
+                </span>
+                    <div class="dash-widget-info">
+                        <h3><?= $temp;  ?></h3>
+                        <span>Temperature Log Book</span>                   
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content container-fluid">
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="page-title">Form</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url('Document_List/forms') ?>">Dashboard / Checklist / Monthly Task Checklist</a></li>
+                <!-- <li class="breadcrumb-item"><a href="<?php echo base_url('Document_List') ?>">Document</a></li> -->
+
+            </ul>
+        </div>
+
+        <div class="col-auto float-right ml-auto">
+            <a href="<?php echo base_url('Document_List/add_monthly_stainer'); ?>" class="btn add-btn"><i class="fa fa-plus"></i> Add</a>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="notification">
+    <?php if ($this->session->flashdata('message') != '') { ?>
+        <div class="success_list">
+            <?= $this->session->flashdata('message');
+            $this->session->unset_userdata('message');
+            ?>
+        </div>
+    <?php } ?>
+    <?php if ($this->session->flashdata('error') != '') { ?>
+        <div class="error_list">
+            <?= $this->session->flashdata('error');
+            $this->session->unset_userdata('error'); ?>
+        </div>
+    <?php } ?>
+</div>
+
+<!-- <div id="calendar"></div> -->
+<div id="mon"></div>
+<!-- <div class="table-responsive">
+    <form action="<?= site_url('Document_List/delete_bulk_document'); ?>" method="post" id="delete_pt_frm">
+        <input type="hidden" name='<?= $this->security->get_csrf_token_name(); ?>' value='<?= $this->security->get_csrf_hash(); ?>'>
+        <table class="table table-striped no-footer" id="revision_table_datatable" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Source</th>
+                    <th>Ref.</th>
+                    <th>Initiative</th>
+                    <th>Action Owner</th>
+                    <th>Target date</th>
+                    <th>Status</th>
+                    <th>Comment</th>
+                    <th>Added By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($monthly_stainer as $key => $value) {
+                    $id = $value['id'];
+                    $output = "<tr>";
+                    $output .= "<td>" . $value['source'] . "</td>";
+                    $output .= "<td>" . $value['ref'] . "</td>";
+                    $output .= "<td>" . $value['intiative'] . "</td>";
+                    $output .= "<td>" . $value['actionOwner'] . "</td>";
+                    $output .= "<td>" . $value['target_date'] . "</td>";
+                    $output .= "<td>" . $value['status'] . "</td>";
+                    $output .= "<td>" . $value['comment'] . "</td>";
+                    $output .= "<td>" . $value['addedBy'] . "</td>";
+                    $output .= "<td><a href=" . site_url('Document_List/add_monthly_stainer/') . "$id>Edit  </a><a href='javascript:delete_team(" . $id . ")'>Delete</a></td>";
+                    $output .= "</tr>";
+                    echo $output;
+                }
+                ?>
+
+            </tbody>
+        </table>
+    </form>
+    <div class="modal custom-modal fade" id="delete_monthly_stainer_modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-header">
+                        <h3>Delete Monthly Stainer</h3>
+                        <p>Are you sure want to delete?</p>
+                    </div>
+                    <div class="modal-btn delete-action">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="javascript:void(0);" class="btn btn-primary continue-btn monthly-stainer-delete-btn">Delete</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+            </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('mon');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+        });
+        calendar.render();
+        
+        var stainer_data = '<?php echo json_encode($monthly_stainer) ?>';
+        var ev = [];
+        $(JSON.parse(stainer_data)).each(function(key ,val) {
+            var n = { 
+                    title: val.source,
+                    start: val.target_date,
+                    url: _base_url+'Document_List/add_monthly_stainer/'+val.id
+                };
+
+            ev.push(n);
+           
+        });
+        calendar.addEventSource(ev);
+      });
+
+
+
+    function delete_team(id){    
+        $('#delete_monthly_stainer_modal').modal('show');    
+        $('.monthly-stainer-delete-btn').attr('href', _base_url + 'Document_List/deleteMonthlyStainer/'+id);
+    }
+</script>

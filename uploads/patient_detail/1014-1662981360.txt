@@ -1,0 +1,5 @@
+MSH|^~\&|PathHub|Vin Rajeswaran|HL7Soup|FNQH Pathology Pty Ltd|20220912121600||ORM^O01|MSGID20220912121600|P|2.4
+PID|1014||31582||Smith^Barry^^^||19640420|M|||^^^|||||||
+PV1||O|OP^PAREG^||||2342^Jones^Bob|||OP|||||||||2|||||||||||||||||||||||||20060307110111|
+ORC|NW|20060307110114
+OBR|1|20060307110114||003038^Urinalysis^L|||20060307110114
