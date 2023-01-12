@@ -7431,6 +7431,29 @@ if (!empty($javascripts)) {
                     },
                 }
             });
+            $('input.typeaheadrequest').typeahead({
+                minLength: 2,
+                highlight: true
+            },
+            {
+                name: 'record_search',
+                source: record_suggestions,
+                display: function (item) {
+                    return item.first_name + ' ' + item.surname;
+                },
+                limit: 30,
+                templates: {
+                    suggestion: function (item) {
+                        return '<div><a href="<?= base_url(SEARCH_RECORD_LINK_PATH); ?>' + item.record_id + '">' + item.serial_number + ' --- ' + item.first_name + ' ' + item.surname + ' --- ' + item.lab + '</a></div>';
+                    },
+                    notFound: function (query) {
+                        return 'No Result Found...';
+                    },
+                    pending: function (query) {
+                        return '<div>Loading...<i class="fa fa-circle-o-notch fa-spin pull-right" style="font-size:20px;"></i></div>';
+                    },
+                }
+            });
     });
 </script>
 

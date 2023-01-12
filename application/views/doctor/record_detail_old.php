@@ -1918,7 +1918,7 @@ else $disableDiv = " ";
                                                     ?>
 
                                                     <div class="form-group col-md-3">
-                                                        <label for="gender">Gender - CR0080</label>
+                                                        <label for="gender">Sex</label>
                                                         <div class="form_input_container" data-key="gender">
                                                             <div class="radial_btn_container change_status_color">
                                                                 <svg class="svg_gender" width="26" height="26">
@@ -1967,7 +1967,7 @@ else $disableDiv = " ";
                                                     ?>
 
                                                     <div class="form-group col-md-3">
-                                                        <label for="dob">DOB -CR0100</label>
+                                                        <label for="dob">DOB</label>
                                                         <div class="form_input_container" data-key="dob">
                                                             <div class="radial_btn_container change_status_color">
                                                                 <svg class="svg_dob" width="26" height="26">
@@ -2146,7 +2146,7 @@ else $disableDiv = " ";
                                                     }
                                                     ?>
                                                     <div class="form-group col-md-3">
-                                                        <label for="medicare_card_no">Medicare Card Number</label>
+                                                        <label for="medicare_card_no">NHS Number</label>
                                                         <div class="form_input_container" data-key="medicare_card_no">
                                                             <div class="radial_btn_container change_status_color">
                                                                 <svg class="svg_medicare_card_no" width="26" height="26">
@@ -2161,7 +2161,7 @@ else $disableDiv = " ";
 
                                                             </div>
                                                             <input type="text" onblur="save_case_request(this.id)" class="form_input" id="medicare_card_no"
-                                                                   name="medicare_card_no" placeholder="Medicare Card Number" value="<?php echo $p_result[0]->medicare_card_no;?>"
+                                                                   name="medicare_card_no" placeholder="NHS Number" value="<?php echo $p_result[0]->medicare_card_no;?>"
                                                                    >
                                                         </div>
                                                     </div>

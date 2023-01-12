@@ -40,7 +40,134 @@ Class Doctor_model extends CI_Model
 		//exit;
         return $query->result();
     }
+
+    public function display_published_record_all($year, $recent = '', $flag_type = '', $sort_authorize = '', $urgency_type = '', $row_color_code = '', $publish)
+    {
+        $this->get_datatables_record_query_all($year, $recent, $flag_type, $sort_authorize, $urgency_type, $row_color_code, $publish);
+        if ($_POST['length'] != -1) 
+		{
+            $this->db->limit(intval(5), $_POST['start']);
+        }
+        $query = $this->db->get();
+    //    echo $this->db->last_query(); 
+		// exit;
+        return $query->result();
+    }
     
+
+    public function get_datatables_record_query_all($year, $recent = '', $flag_type = '', $sort_authorize = '', $urgency_type = '', $row_color_code = '', $publish)
+    {
+		$user_id = $this->ion_auth->user()->row()->id;
+		$group_id = $this->ion_auth->get_users_main_groups($user_id)->row()->id;
+		$groupType = $this->ion_auth->get_users_main_groups()->row()->group_type;			
+		$doctor_id=$user_id;
+
+		if(in_array($groupType,LAB_GROUP))
+		{         
+			//$this->db->select("*, CONCAT(AES_DECRYPT(users.first_name, '" . DATA_KEY . "'),' ' ,AES_DECRYPT(users.last_name, '" . DATA_KEY . "')) AS added_by");
+			$this->db->select('*,count(DISTINCT(specimen.specimen_id)) as speciman_no');
+			$this->db->from($this->table);
+			$this->db->join('request_assignee', 'request.uralensis_request_id = request_assignee.request_id', 'INNER');
+            $this->db->join('billing_data', 'billing_data.id = request.billing_code_ids', 'LEFT');
+			$this->db->join('specimen', 'specimen.request_id = request.uralensis_request_id', 'LEFT');			
+			$this->db->where('request.lab_id', $group_id);
+			$this->db->where('request.publish_status', $publish);
+            $this->db->group_by('request.uralensis_request_id');
+			//$this->db->where('request.request_code_status', 'record_publish');
+			
+				
+		}
+		else if(in_array($groupType,HOSPITAL_GROUP))
+		{
+			
+			$this->db->select('*');
+			$this->db->from($this->table);
+			$this->db->join('request_assignee', 'request.uralensis_request_id = request_assignee.request_id', 'INNER');
+			$this->db->where('request.hospital_group_id', $group_id);
+			$this->db->where('request.publish_status', $publish);
+			//$this->db->where('request.request_code_status', 'record_publish');        				
+		}
+		else
+		{
+			$this->db->select('*');
+			$this->db->from($this->table);
+			$this->db->join('request_assignee', 'request.uralensis_request_id = request_assignee.request_id', 'INNER');
+			$this->db->where('request_assignee.user_id', $doctor_id);
+			$this->db->where('request.publish_status', $publish);
+			//$this->db->where('request.request_code_status', 'record_publish');        	
+		}
+		
+        // $this->db->where('YEAR(request_datetime)', $year);
+        if (!empty($urgency_type)) {
+            if($urgency_type>20)
+            {
+                 $this->db->where('request_datetime >=', 'DATE_FORMAT(CURDATE(), "%Y-%m-%d") - INTERVAL '.$urgency_type.' DAY');
+
+            }else{
+                    $this->db->where('request_datetime <=', 'DATE_FORMAT(CURDATE(), "%Y-%m-%d") - INTERVAL '.$urgency_type.' DAY');
+            }
+            
+            //$this->db->where('report_urgency', $urgency_type);
+        }
+        if ($row_color_code === 'row_yellow') {
+            $this->db->where('request_code_status', 'new');
+        } else if ($row_color_code === 'row_orange') {
+            $this->db->where('request_code_status', 'rec_by_lab');
+        } else if ($row_color_code === 'row_purple') {
+            $this->db->where('request_code_status', 'pci_added');
+        } else if ($row_color_code === 'row_green') {
+            $this->db->where('request_code_status', 'assign_doctor');
+        } else if ($row_color_code === 'row_skyblue') {
+            $this->db->where('request_code_status', 'micro_add');
+        } else if ($row_color_code === 'row_blue') {
+            $this->db->where('request_code_status', 'add_to_authorize');
+        } else if ($row_color_code === 'row_brown') {
+            $this->db->where('request_code_status', 'furtherwork_add');
+        } else if ($row_color_code === 'row_white') {
+            $this->db->where('request_code_status', 'record_publish');
+        }
+        if (!empty($flag_type)) {
+            $this->db->where('flag_status', $flag_type);
+        }
+        if (!empty($recent) && $recent === 'recent') {
+            $this->db->where('request_datetime >=', 'DATE_FORMAT(CURDATE(), "%Y-%m-%d") - INTERVAL 2 MONTH');
+        }
+        if (!empty($sort_authorize) && $sort_authorize === 'sort_authorize') {
+            $this->db->order_by('publish_datetime', 'DESC');
+        } else {
+            $this->db->order_by('uralensis_request_id', 'DESC');
+        }
+        $i = 0;
+        foreach ($this->column_search as $item) { // loop column
+            if ($_POST['search']['value']) { // if datatable send POST for search
+                if ($i === 0) { // first loop
+                    if ($item === 'dob') {
+                        $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                        $new_format_dob = date('Y-m-d', strtotime($_POST['search']['value']));
+                        $this->db->like($item, $new_format_dob);
+                    }
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    if ($item === 'dob') {
+                        $new_format_dob = date('Y-m-d', strtotime($_POST['search']['value']));
+                        $this->db->or_like($item, $new_format_dob);
+                    }
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+                if (count($this->column_search) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) { // here order processing
+            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else if (isset($this->order)) {
+            $order = $this->order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+
     /**
      * Get Datatables Record Query
      *
@@ -179,6 +306,14 @@ Class Doctor_model extends CI_Model
     public function record_count_filtered($year, $recent = '', $flag_type = '', $sort_authorize = '', $urgency_type = '', $row_color_code = '')
     {
         $this->get_datatables_record_query($year, $recent, $flag_type, $sort_authorize, $urgency_type = '', $row_color_code = '');
+        $query = $this->db->get();
+        
+        return $query->num_rows();
+    }
+
+    public function record_count_filtered_all($year, $recent = '', $flag_type = '', $sort_authorize = '', $urgency_type = '', $row_color_code = '', $publish = '')
+    {
+        $this->get_datatables_record_query_all($year, $recent, $flag_type, $sort_authorize, $urgency_type = '', $row_color_code = '', $publish);
         $query = $this->db->get();
         
         return $query->num_rows();
