@@ -3398,8 +3398,8 @@ error_reporting(E_ALL);*/
         // $this->Doctor_model->record_count_all()
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Doctor_model->record_count_filtered_all($url_year, $url_type, $flag_type, $sort_authorize, $urgency_type, $row_color_code,$_POST['publish']),
-            "recordsFiltered" => intval($row_count),
+            "recordsFiltered" => $this->Doctor_model->record_count_filtered_all($url_year, $url_type, $flag_type, $sort_authorize, $urgency_type, $row_color_code,$_POST['publish']),
+            "recordsTotal" => intval($row_count),
             "data" => $data,
         );
         echo json_encode($output);

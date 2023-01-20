@@ -516,9 +516,9 @@ div.dataTables_wrapper div.dataTables_length select {
                         margin-left: 17px;
                     }
                 </style>
-                <h1>Unpublished Records</h1>
+                <h1>Published Records</h1>
                 
-                <table id="doctor_record_publish_table" class="table table-striped custom-table custom-search-table" cellspacing="0" width="100%">
+                <table id="publishedData" class="table table-striped custom-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <!-- <th>
@@ -536,10 +536,11 @@ div.dataTables_wrapper div.dataTables_length select {
                         </tr>
                     </thead>
                 </table>
+                
                 <p></p>
-                <h1>Published Records</h1>
+                <h1>Unpublished Records</h1>
                 <p></p>
-                <table id="" class="table table-striped custom-table custom-search-table unpublish_table" cellspacing="0" width="100%">
+                <table id="unpublishedData" class="table table-striped custom-table custom-search-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <!-- <th>

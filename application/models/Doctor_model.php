@@ -79,12 +79,40 @@ Class Doctor_model extends CI_Model
 		}
 		else if(in_array($groupType,HOSPITAL_GROUP))
 		{
+
+            // $result = $this->db->query("SELECT * FROM request 
+            //         INNER JOIN request_assignee
+            //         WHERE request.uralensis_request_id = request_assignee.request_id
+            //         AND request_assignee.user_id = $user_id 
+            //         AND request.specimen_publish_status = 0
+            //         AND supplementary_review_status = 'false'");
+            // echo $this->db->last_query();
+            // exit;
+
+            if ($publish == 1) {
+                $year = "2022";
+                $this->db->select('*');
+                $this->db->from($this->table);
+                $this->db->join('request_assignee', 'request.uralensis_request_id = request_assignee.request_id', 'INNER');
+                $this->db->where('request_assignee.user_id', $user_id);
+                $this->db->where('request.specimen_publish_status', $publish);
+                $this->db->where('YEAR(request.request_datetime)', $year);
+            } else {
+                $this->db->select('*');
+                $this->db->from($this->table);
+                $this->db->join('request_assignee', 'request.uralensis_request_id = request_assignee.request_id', 'INNER');
+                $this->db->where('request_assignee.user_id', $user_id);
+                $this->db->where('request.specimen_publish_status', $publish);
+                $this->db->where('request.supplementary_review_status', 'false');
+            }
+            // $result = $this->db->query("SELECT * FROM request
+            //         INNER JOIN request_assignee
+            //         WHERE request.uralensis_request_id = request_assignee.request_id
+            //         AND request_assignee.user_id = $user_id
+            //         AND YEAR(request.request_datetime) = $year
+            //         AND request.specimen_publish_status = 1");
 			
-			$this->db->select('*');
-			$this->db->from($this->table);
-			$this->db->join('request_assignee', 'request.uralensis_request_id = request_assignee.request_id', 'INNER');
-			$this->db->where('request.hospital_group_id', $group_id);
-			$this->db->where('request.publish_status', $publish);
+			
 			//$this->db->where('request.request_code_status', 'record_publish');        				
 		}
 		else
