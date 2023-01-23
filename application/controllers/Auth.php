@@ -2204,8 +2204,11 @@ public function delete_group($user_id) {
         }
     }
 
-    public function edit_user($id) 
+    public function edit_user($id = '') 
     {
+        if($id == ''){
+            $id = $this->ion_auth->user()->row()->id;
+        }
         track_user_activity();
         $this->Userextramodel->generate_userid($id);
         $this->data['title'] = "Edit User";

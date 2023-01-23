@@ -37,10 +37,10 @@ function record_history($record_history, $userid, $record_add_timestamp, $add_fu
                             </th>
                         </tr> -->
                         <tr>
-                            <th>Ref</th>
+                            <!-- <th>Ref</th> -->
                             <th>Date</th>
                             <!-- <th>Time</th> -->
-                            <th>Status</th>
+                            <th>Action</th>
                             <th>User ID</th>
                         </tr>
                         </thead>

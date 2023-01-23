@@ -2482,6 +2482,8 @@ error_reporting(E_ALL);*/
                 'specimen_feedback_to_secretary_timestamp' => time(),
                 'specimen_error_log' => $this->input->post('specimen_error_log'),
                 'specimen_error_log_timestamp' => time(),
+                'caseMaterial' => $this->input->post('caseMaterial'),
+                'noOfSlides' => $this->input->post('noOfSlides'),
                 //'specimen_benign' => !empty($specimen_benign) ? $specimen_benign : '',
                 //'specimen_atypical' => !empty($specimen_atypical) ? $specimen_atypical : '',
                 //'specimen_malignant' => !empty($specimen_malignant) ? $specimen_malignant : '',

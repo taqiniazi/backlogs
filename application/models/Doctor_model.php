@@ -849,7 +849,7 @@ Class Doctor_model extends CI_Model
                 specimen_feedback_to_lab, specimen_feedback_to_lab_timestamp,
                 specimen_feedback_to_secretary, specimen_feedback_to_secretary_timestamp,
                 specimen_error_log, specimen_error_log_timestamp,
-                rbc.billing_type, rbc.bill_code, rbc.bill_code_text, rbc.billing_type, rbc.bill_description, rbc.bill_price,urtt.billing_type as billing_type2, urtt.specimen_id_val as specimen_id_val, urtt.tissue_type_id, urtt.department_id
+                rbc.billing_type, rbc.bill_code, rbc.bill_code_text, rbc.billing_type, rbc.bill_description, rbc.bill_price,urtt.billing_type as billing_type2, urtt.specimen_id_val as specimen_id_val, urtt.tissue_type_id, urtt.department_id,specimen.caseMaterial,specimen.noOfSlides
                  FROM request
             INNER JOIN specimen
             INNER JOIN users

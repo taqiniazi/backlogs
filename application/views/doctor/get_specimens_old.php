@@ -906,7 +906,42 @@ else $disableDiv1 = " ";
                             </div>
                         </div>
 
+                        <div class="col-md-12 nopadding" <?=$disableDiv?>>
+                            <div class="sec_title form-group">
+                            Case Materials & Number of slides <a href="javascript:;" class="checv_up_down"><i
+                                        class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="card hidden show">
+                                <div class="card-body">
+                                    <fieldset class="tg-tabfieldsettwo">
+                                        
+                                        <div id=""
+                                             class="form-group" style="display: flex;align-items: center;width: 50%;">
+                                                <label for="" style="width: 200px;">Case Materials</label>
+                                            
+                                            <input type="text" name="caseMaterial" id="caseMaterial_<?php echo intval($key+1); ?>" data-key="<?php echo intval($key+1); ?>" class="addtionalFields tt-input" placeholder="Case Materials" value="<?php echo $row->caseMaterial; ?>" autocomplete="off" spellcheck="false">
+                                            <!-- <textarea name="specimen_macroscopic_description"
+                                                      id="specimen_macroscopic_description_<?php echo intval($key+1); ?>"
+                                                      class="form-control tg-tinymceeditor form-controlactive"
+                                                      placeholder="Macroscopic Description"><?php echo $row->specimen_macroscopic_description; ?></textarea> -->
+                                        </div>
 
+                                        <div id=""
+                                             class="form-group" style="display: flex;align-items: center;width: 50%;">
+                                                <label for="" style="width: 200px;">Number of slides</label>
+                                            
+                                            <input type="text" name="noOfSlides" id="noOfSlides_<?php echo intval($key+1); ?>" data-key="<?php echo intval($key+1); ?>" onkeypress="return isNumber(event)" class="addtionalFields tt-input" placeholder="Number of slides" value="<?php echo $row->noOfSlides; ?>" autocomplete="off" spellcheck="false">
+                                            <!-- <textarea name="specimen_macroscopic_description"
+                                                      id="specimen_macroscopic_description_<?php echo intval($key+1); ?>"
+                                                      class="form-control tg-tinymceeditor form-controlactive"
+                                                      placeholder="Macroscopic Description"><?php echo $row->specimen_macroscopic_description; ?></textarea> -->
+                                        </div>
+                                        
+
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12 nopadding" <?=$disableDiv?>>
                             <div class="sec_title form-group">
                                Specimen Macroscopic Description <a href="javascript:;" class="checv_up_down"><i
@@ -2937,12 +2972,16 @@ else $disableDiv1 = " ";
                             jQuery(document).find('.dusrd3').on('change', function (e) {
                                 jQuery(document).find('#doctor_update_specimen_record_1').submit();
                             });
-
+                            
                             jQuery(document).find('.dusrd2').on('select2:select, focusout, change', function (e) {
                                 let specimentCount = jQuery(document).find('.specimen_content').find('.tg-themenavtabs').find('li').length;
                                 for(let sc=0; sc<specimentCount; sc++){
                                     jQuery(document).find('#doctor_update_specimen_record_'+ (sc+1)).submit();
                                 }
+                            });
+                            jQuery(document).find('.addtionalFields').on('change', function (e) {
+                                e.stopImmediatePropagation();
+                                jQuery(document).find('#doctor_update_specimen_record_'+ $(this).attr("data-key")).submit();
                             });
 
                             jQuery(document).find('.dusrd').on('select2:select, focusout, change', function (e) {

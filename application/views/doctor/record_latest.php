@@ -80,8 +80,18 @@ div.dataTables_wrapper div.dataTables_length select {
     top: -48px;
 }
  }
+ .dt-button {
+    border-radius: 4px;
+    border: 1px solid #000;
+    font-size: 13px;
+    padding: 8px 20px;
+    background-color: #000;
+    color: #fff;
+    margin-top: 15px;
+}
 </style>
-<div class="content tablewidth container-fluid publish-record">
+<!-- <div class="content tablewidth container-fluid publish-record"> -->
+<div id="record_list_table_authorization_wrapper" class="dataTables_wrapper dt-bootstrap4">
         <div class="row">
         <div class="speace-setup col-sm-12">
         <h3 class="page-title">Records</h3>

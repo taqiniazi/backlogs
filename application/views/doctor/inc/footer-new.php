@@ -98,6 +98,12 @@
         <script src="<?php echo base_url('/assets/js/jquery.bpopup.min.js'); ?>"></script>
         <script src="<?php echo base_url('/assets/newtheme/js/custom_jquery.dataTables.min.js'); ?>"></script>
         <script src="<?php echo base_url('/assets/newtheme/js/dataTables.bootstrap4.min.js'); ?>"></script>
+        <script src="<?php echo base_url('/assets/newtheme/js/dataTables.buttons.min.js'); ?>"></script>
+        <script src="<?php echo base_url('/assets/newtheme/js/buttons.html5.min.js'); ?>"></script>
+        <script src="<?php echo base_url('/assets/newtheme/js/pdfmake.min.js'); ?>"></script>
+        <script src="<?php echo base_url('/assets/newtheme/js/vfs_fonts.js'); ?>"></script>   
+        <script src="<?php echo base_url('/assets/newtheme/js/jszip.min.js'); ?>"></script>
+       
 <?php $this->load->view("session");?>
         <script src="<?php echo base_url('/assets/js/sticky_message.js'); ?>"></script>
         <script src="<?php echo base_url('/assets/js/jquery.inputmask.bundle.js'); ?>"></script>
@@ -636,6 +642,27 @@ if(!empty($javascripts)){
             searching: true,
             processing: true,
             lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            dom: 'Bfrtip',
+        buttons: [
+        {
+            extend: 'copy',
+            exportOptions: {
+            columns: [0,1,2,3,7]
+            }
+        },
+        {
+            extend: 'csv',
+            exportOptions: {
+            columns: [0,1,2,3,7]
+            }
+        },
+        {
+            extend: 'pdf',
+            exportOptions: {
+            columns: [0,1,2,3,7]
+            }
+        },
+        ],
         });
 
         //DataTable custom search field
@@ -2818,7 +2845,7 @@ function add_request_clinician_table_data(data) {
 
 function add_table_data(data) {
     var row = $("<tr></tr>");
-    row.append('<td>'+data['ref']+'</td>');
+    // row.append('<td>'+data['ref']+'</td>');
     row.append('<td>'+data['date']+'</td>');
     // row.append('<td>'+data['time']+'</td>');
     row.append('<td>'+data['status']+'</td>');
@@ -4544,6 +4571,27 @@ $('#doctor_record_publish_table').DataTable({
                 dataType: "json",
                 data: {'year': url_year, 'type': url_type, 'flag_type': flag_type, 'sort_authorize': sort_authorize, 'urgency_type': urgency_type, 'row_color_code': row_color_code , 'range':dateRange}
             },
+            dom: 'Bfrtip',
+        buttons: [
+        {
+            extend: 'copy',
+            exportOptions: {
+            columns: [0,1,2,3,5]
+            }
+        },
+        {
+            extend: 'csv',
+            exportOptions: {
+            columns: [0,1,2,3,5]
+            }
+        },
+        {
+            extend: 'pdf',
+            exportOptions: {
+            columns: [0,1,2,3,5]
+            }
+        },
+        ],
             "bDestroy": true,
                 fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                  $('td', nRow).eq(9).addClass('flag_column');

@@ -288,10 +288,22 @@ div.dataTables_wrapper div.dataTables_length select {
     top: -4px;
 }
 }
-
+.dt-button {
+    border-radius: 4px;
+    border: 1px solid #000;
+    font-size: 13px;
+    padding: 8px 20px;
+    background-color: #000;
+    color: #fff;
+    margin-top: 15px;
+}
+.page-wrapper > .content{
+    /* padding-left : 0% !important; */
+}
 </style>
 <div class="clearfix"></div>
-<div class="content container-fluid publish-record">
+<!-- <div class="content container-fluid publish-record"> -->
+<div id="record_list_table_authorization_wrapper" class="dataTables_wrapper dt-bootstrap4">
     <div class="row">
         <div class="speace-setup col-sm-12">
             <h3 class="page-title">Reported Cases</h3>
@@ -469,6 +481,9 @@ div.dataTables_wrapper div.dataTables_length select {
                         </li>
                     </ul>
                 </div>
+                            </div>
+                            </div>
+                            </div>
               
                         
      
@@ -943,7 +958,7 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
                             <td><?php echo($specialty) ?></td>
                             <td>====<?php echo $row->pci_number; ?><br></td>
                             <td style="width:93px !important" width="93"><?php echo $row->f_name; ?><br><?php echo $row->sur_name; ?></td>
-                            <td><?php echo $row->nhs_number; ?><br><?php echo $dob; ?></td>
+                            <td><?php echo $dob; ?></td>
                             <td><?php echo $row->lab_number; ?><br><?php echo $lab_release_date; ?></td>
                             <td class="text-center"><div class="<?php echo $urgency_class; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $urgency_title; ?>" style="font-size:18px;"></div></td>
                             <td class="flag_column text-center">
