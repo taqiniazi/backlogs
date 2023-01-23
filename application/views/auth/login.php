@@ -100,15 +100,51 @@
         left: 90%;
         cursor: pointer;
     }
+	
+	.wizard > .steps {
+    position: relative;
+    display: none !important;
+    width: 100%;
+}
+.login_wrap {
+    max-width: 470px;
+    width: 100%;
+    /* border-radius: 10px; */
+    position: absolute;
+    left: 72% !important;
+    top: 70%  !important;
+    transform: translate(-50%, -50%);
+}
+
+.login_wrap .form-group {
+    position: relative;
+    margin-bottom: 0;
+    padding: 5px;
+}
+.content
+{
+	background-color:#c1c1c1;
+}
+
+.login_wrap section.body input {
+    padding-left: 40px;
+    border-radius: 0px;
+    height: 60px;
+    background-color: #ffffcd !important;
+}
+	
 </style>
 <main>
+ <div >
+                <img src="<?php echo base_url()?>assets/img/bklogo.jpg" width="300" alt="" class="img-responsive img-fluid">
+            </div>
 
     <div class="login_wrap">
-        <div class="login_wrap2" style="padding: 20px 40px 20px; max-height: 540px; overflow-y: hide;">
+        <div class="" style="max-height:540px; overflow-y: hide;">
             
-            <div class="live_logo">
-                <img src="<?php echo base_url()?>assets/img/login-logo.png" alt="" class="img-responsive img-fluid">
-            </div>
+        <div >
+       <center> Registered Users Login</center>
+        </div>   
             
             <div id="infoMessage"><?php echo html_purify($message); ?></div>
 
@@ -123,7 +159,7 @@
                 <section>
                     <div class="form-group">
                         <span><i class="fa fa-user"></i></span>
-                        <?php echo form_input($identity, '', 'class="form-control" placeholder="Email Address"'); ?>
+                        <?php echo form_input($identity, '', 'class="form-control" placeholder="User Name"'); ?>
                     </div>
                     <div class="form-group">
                         <span><i class="fa fa-lock"></i></span>
@@ -198,9 +234,9 @@
                 <?php echo form_close(); ?>
             </div>
             <br>
-            <div class="text-center">PathHub version 6.0</div>
+            <div class="text-center" style="display:none">PathHub version 6.0</div>
         </div>
-        <div class="pathhub">
+        <div class="pathhub" style="display:none">
             <a class="pathub_a" target="_blank" href="https://www.pathhub.com">
                 Uralensis Innov8
             </a>

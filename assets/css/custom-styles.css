@@ -1,5 +1,5 @@
 .logo{
-    width:  40px;
+    width:  200px;
 }
 input, button, a {
     transition: all 0.4s ease;
@@ -30,14 +30,11 @@ input, button, a {
     border-color: #ccc !important;
 }
 .header {
-    background: #00c5fb;
-    background: -moz-linear-gradient(left, #00c5fb 0%, #0253cc 100%);
-    background: -webkit-linear-gradient(left, #00c5fb 0%, #0253cc 100%);
-    background: -ms-linear-gradient(left, #00c5fb 0%, #0253cc 100%);
-    background: linear-gradient(to right, #00c5fb 0%, #0253cc 100%);
-    border-bottom: 1px solid transparent;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-    height: 60px;
+    background: #fff;
+    
+    border-bottom: 0px solid transparent;
+   
+    height: 120px;
     left: 0;
     position: fixed;
     right: 0;
@@ -77,13 +74,14 @@ a#show_hidden:hover, a#show_hidden:focus {
     padding: .5rem 1rem;
 }
 .user-menu {
-    float: right;
+   float: right;
     margin: 0;
     position: relative;
     z-index: 99;
+    top: 30px;
 }
 .user-menu.nav > li > a {
-    color: #fff;
+    color: #000;
     font-size: 15px;
     line-height: 60px;
     padding: 0 15px;
@@ -93,7 +91,12 @@ a#show_hidden:hover, a#show_hidden:focus {
     font-size: 20px;
     line-height: 60px;
 }
-.page-wrapper.sidebar-patient{padding-top: 80px!important; background: #f5f5f5}
+.page-wrapper.sidebar-patient{padding-top: 155px!important; background-image: url(inner-bg.png), url(inner-bg.png);
+    background-repeat: no-repeat, repeat;
+    background-size: 100% 100%;
+	padding-left: 11% !important;
+	
+	 }
 .user-menu.nav > li > a .badge {
     color: #fff;
     font-weight: 700;
@@ -141,9 +144,10 @@ a#show_hidden:hover, a#show_hidden:focus {
     min-width: auto;
     padding: 4px 9px;
 }
-.dashboard_widgets .card{min-height: 140px}
+.dashboard_widgets .card{min-height: 140px; background-color: transparent;}
 .active_list{
     margin: 0;
+	
     list-style: none;
     overflow: hidden;
     padding-top: 15px;

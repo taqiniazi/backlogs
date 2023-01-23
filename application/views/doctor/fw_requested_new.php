@@ -211,39 +211,7 @@ button.pdf i{
                 <li><a href="javascript:;">Dashboard</a></li>
                 <li class="active">Requests</li>
             </ol>
-            <div class="tg-rightarea">
-                <div class="tg-haslayout">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="tg-filterhold">
-                                <ul class="tg-filters record-list-filters">
-                                    <!-- <li class="tg-statusbar tg-flagcolor">
-                                        <div class="tg-checkboxgroup tg-checkboxgroupvtwo">
-                                            <span class="tg-radio tg-flagcolor1">
-                                                <input class="tat" name="hostpital" id="nn" type="radio">
-                                                <label for="nn"><span>NN</span></label>
-                                            </span>
-                                            <span class="tg-radio tg-flagcolor2">
-                                                <input class="tat" type="radio" name="hostpital" id="vn">
-                                                <label for="vn"><span>VN</span></label>
-                                            </span>
-                                            <span class="tg-radio tg-flagcolor3">
-                                                <input class="tat" type="radio" name="hostpital" id="ss">
-                                                <label for="ss"><span>SS</span></label>
-                                            </span>
-                                           
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <button class="btn btn-default bg_blue_select btn-rounded btn-sm pdf" onclick="print()"><i class="fa fa-print fa-2x"></i></button>
-                                        <button class="btn btn-default bg_red_select btn-rounded btn-sm pdf"><i class="fa fa-file-pdf-o fa-2x text-danger"></i></button>
-                                    </li> -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
    <div class="tg-haslayout" style="width: 71%; margin-left: 84px; position: relative; z-index:1;">

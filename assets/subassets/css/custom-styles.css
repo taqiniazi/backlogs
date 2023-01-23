@@ -64,6 +64,7 @@
 .page-wrapper.sidebar-patient {
 	margin-left: 230px;
 	padding-top: 75px;
+	padding-left: 10% !important;
 }
 .page-header {margin-top: 10px; border-bottom: 0px}
 .user-menu {
@@ -226,7 +227,7 @@
 
 /*Footer*/
 footer {
-	/*background-color: #737373;*/
+	background-color: #444444;
 }
 footer .row:first-child {
 	justify-content: center;

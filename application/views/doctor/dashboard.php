@@ -141,28 +141,17 @@
 <div class="container-fluid lab-heading" style="padding: 0 30px">
 	<div class="page-header">
 		<div class="row">
-			<div class="col-sm-8">
-				<h3 class="page-title">Welcome <?php echo $decryptedDetails->first_name." ".$decryptedDetails->last_name?></h3>
-<!--				<h3 class="page-title">Welcome</h3>-->
+			<div class="col-sm-12">
+				<h3 style="float:right; font-size:20px" class="page-title">Welcome <?php echo $decryptedDetails->first_name." ".$decryptedDetails->last_name?>  |  <a href="https://backlogsdemo.pathhub.uk/index.php/auth/logout">Logout</a></h3>
+				
 			</div>
-			<div class="col-sm-4">
-				<div class="pull-right">
-				<!-- <a href="javascript:void(0);" id="doctor_advance_search"><i class="fa fa-cog fa-2x"></i></a> -->
-				<!-- <a id="doctor_advance_search" class="btn btn-info btn-lg newbtn" href="javascript:void(0);"> Advance Search</a> -->
-				</div>
+			
+            <div class="col-sm-12">
+            <p style="color:red; text-align:right">Your session will timeout in 30 minutes. Save any unsaved work or refresh the browser to continue.</p>
 			</div>
-			<div class="clearfix"></div>
+            <div class="clearfix"></div>
 		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	        	<div class="breadcrumb">
-	            	<ul class="tg-breadcrumb tg-breadcrumbvtwo">
-	            		<li class="breadcrumb-item active">Dashboard</li>
-	            	</ul>
-	                <!-- <button class="btn btn-primary" data-toggle="collapse" data-target="#collapse_filter_hospital">Filter By Hospital</button> -->
-	            </div>
-	        </div>
-	    </div>
+		
 	</div>
     <?php if ($this->session->flashdata('upload_error') != '') { ?>
         <div class="error_list" style="color: red;">

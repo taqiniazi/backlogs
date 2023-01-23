@@ -294,7 +294,7 @@ div.dataTables_wrapper div.dataTables_length select {
 <div class="content container-fluid publish-record">
     <div class="row">
         <div class="speace-setup col-sm-12">
-            <h3 class="page-title">Records</h3>
+            <h3 class="page-title">Reported Cases</h3>
         </div>
     </div>
     <div class="row">
@@ -331,6 +331,7 @@ div.dataTables_wrapper div.dataTables_length select {
                     </li>
                 </ul>
             </div>
+    </div>
     </div>
   <div class="tg-haslayout">
              <div class="row">
@@ -839,14 +840,11 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
             <table id="doctor_record_list_table" class="table table-striped custom-table mb-0 dataTable no-footer" cellspacing="0" width="100%" style="margin-top:40px">
                 <thead>
                     <tr>
-                        <th>LAB No.</th>
-                        <th>UL No.<br>Track No.</th>
-                        <th>Clinic</th>
-                        <th>Speciality</th>
-                        <th>Courier No.<br>Batch No</th>
+                        <th>Case</th>
+                      
                         <th>Patient</th>
                         <th>DOB</th>
-                        <th>Rel Date</th>
+                        <th>Submitted</th>
                         <th>
                             
                             <img data-toggle="tooltip" title="Urgency" src="<?php echo base_url('/assets/icons/Reported--UnReported.png'); ?>" class="img-responsive">
@@ -859,9 +857,7 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
                         <th  class="text-center">
                             <img data-toggle="tooltip" title="Microscopic" src="<?php echo base_url('/assets/icons/VSlides.png'); ?>" class="img-responsive centerd">
                         </th>
-                        <th  class="text-center">
-                            <img data-toggle="tooltip" title="Comments" src="<?php echo base_url('/assets/icons/Comments.png'); ?>" class="img-responsive centerd">
-                        </th>
+                       
                        
                         <th>TAT</th>
                         <th  class="text-right">
@@ -927,7 +923,7 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
 							
 							<input type="checkbox" value="" name="id" />
 							<?php //echo $row->spec_grp_name; ?></td>
-                            <td><?php echo $row->serial_number; ?><br><?php echo $row->ura_barcode_no; ?></td>
+                            <td><?php echo $row->ura_barcode_no; ?></td>
                             <td>
                                 <?php
                                 $f_initial = '';
@@ -943,9 +939,9 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
                                     <?php echo $f_initial . ' ' . $l_initial; ?>
                                 </a>
                             </td>
-                            <td ><?php echo $courierNo; ?><br><?php echo $batchNo; ?></td>
+                            <td ><?php echo $batchNo; ?></td>
                             <td><?php echo($specialty) ?></td>
-                            <td><?php echo $row->pci_number; ?><br></td>
+                            <td>====<?php echo $row->pci_number; ?><br></td>
                             <td style="width:93px !important" width="93"><?php echo $row->f_name; ?><br><?php echo $row->sur_name; ?></td>
                             <td><?php echo $row->nhs_number; ?><br><?php echo $dob; ?></td>
                             <td><?php echo $row->lab_number; ?><br><?php echo $lab_release_date; ?></td>
@@ -1163,25 +1159,10 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
                         </tr>
                             <?php } }else{ ?>
                             <tr class="<?php //echo $row_code; ?>">
-                                <td><?php echo $row->lab_number; ?><br></td>
-                                <td class="<?php // echo $row_code; ?>"><?php echo $row->serial_number; ?><br><?php echo $row->ura_barcode_no; ?></td>
-                                <td>
-                                    <?php
-                                    $f_initial = '';
-                                    $l_initial = '';
-                                    if (!empty($this->ion_auth->group($row->hospital_group_id)->row()->first_initial)) {
-                                        $f_initial = $this->ion_auth->group($row->hospital_group_id)->row()->first_initial;
-                                    }
-                                    if (!empty($this->ion_auth->group($row->hospital_group_id)->row()->last_initial)) {
-                                        $l_initial = $this->ion_auth->group($row->hospital_group_id)->row()->last_initial;
-                                    }
-                                    ?>
-                                    <a class="hospital_initials" data-toggle="tooltip" data-placement="top" title="<?php echo $this->ion_auth->group($row->hospital_group_id)->row()->description; ?>" href="#" >
-                                        <?php echo $f_initial . '' . $l_initial; ?>
-                                    </a>
-                                </td>
-                                <td><?php echo ($row->speciality_group_id=='1'?'General':$specialty); ?></td>
-                                <td><?php echo $courierNo; ?><br><?php echo $record_batch_id; ?></td>
+                                <td><?php echo $row->lab_number; ?></td>
+                                
+                                
+                               
                                 
                                 
                                 <td><?php echo $row->f_name; ?><br><?php echo $row->sur_name; ?></td>
@@ -1279,15 +1260,7 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
                                 <td>
                                     <img <?php if ($has_slide) echo 'onclick = "window.location.href = \''.base_url().'doctor/doctor_record_detail/'.$row->uralensis_request_id.'/view\'"' ?> src="<?php if ($has_slide) echo base_url('/assets/icons/vslideico_green.png'); else echo base_url('/assets/icons/vslideico.png'); ?>" style="<?php if ($has_slide) echo 'width: 25px; cursor: pointer;'?>" class="img-responsive vslideico">
                                 </td>
-                                <td>
-                                    <div class="comments_icon">
-                                        <a style="color:#000;" href="javascript:;"  class="display_comment_box" data-recordid="<?php echo $row->uralensis_request_id; ?>" data-modalid="<?php echo $flag_count; ?>">
-                                            <?php $getCommentsCount = getFlagCommentsCount($row->uralensis_request_id,C_RECORD_LIST);?>
-                                            <i class="lnr lnr-bubble"></i>
-                                            <span class="badge bg-info"><?php echo $getCommentsCount;?></span>
-                                        </a>
-                                    </div>
-                                </td>
+                                
                                 
                                 <td>
                                     <a class="custom_badge_tat">
@@ -1411,6 +1384,7 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
         </div>
     </div>
 </div>
+
 <style type="text/css">
     .date {
         font-size: 11px
