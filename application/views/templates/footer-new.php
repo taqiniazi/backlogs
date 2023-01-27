@@ -5,6 +5,23 @@
 <!-- /Page Wrapper -->
 </div>
 <!-- /Main Wrapper -->
+<footer>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="text-center">
+                    PathHub &reg; Software Systems Inc. 6.0. Uralensis Innov8 Ltd & LLC.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</footer>
 </body>
 
 

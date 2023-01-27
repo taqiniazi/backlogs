@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('/assets/css/redmond.datepick.css'); ?>">
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="<?php echo base_url('/assets/subassets/css/new_jquery.datetimepicker.css') ?>">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('/assets/subassets/css/style.css') ?>"> -->
+    <link rel="stylesheet" href="<?php echo base_url('/assets/subassets/css/custom-styles.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/newtheme/css/bootstrap-datetimepicker.min.css') ?>">
     <!-- Main CSS -->
     <link rel="stylesheet" href="<?php echo base_url('/assets/newtheme/css/dataset.css'); ?>">
@@ -423,6 +425,7 @@
         }
         .pts_bt{display: none}
     }
+    
 </style>
 <style>
 
@@ -431,6 +434,11 @@
     }
 </style>
 <?php } ?>
+<style>
+    .sidebar-menu li a:hover{
+        color: #000 !important;
+    }
+    </style>
 
 <body>
     <div id="ajax_loading_effect">
@@ -471,7 +479,7 @@
                     Session Time: 03:22
                 </li>
             </ul>
-            <ul class="nav user-menu">
+            <ul class="nav user-menu" style="top: 10px;">
                 <!-- Search -->
                 <li class="nav-item">
                     <div class="top-nav-search">

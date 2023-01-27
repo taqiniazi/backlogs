@@ -662,9 +662,64 @@ if(!empty($javascripts)){
             columns: [0,1,2,3,7]
             }
         },
+        {
+            // extend: 'excelHtml5',
+            text: 'XML',
+            customize: function( xlsx ) {
+                $('.xmlRows').each(function(){
+                    console.log($(this).attr("data-json"));
+                    return false;
+                });
+            }
+        }
         ],
         });
-
+        $(document).on('click','.dt-button',function(){
+            const spanText = $(this).find("span").html();
+            if(spanText === 'XML'){
+                var objects = {};
+                $('.xmlRows').each(function(){
+                    objects[$(this).attr('data-lab_number')] = 
+                        {
+                            patient : $(this).attr('data-pname'),
+                            dob : $(this).attr('data-dob'),
+                            requested : $(this).attr('data-requested'),
+                            tat : parseInt($(this).find(".custom_badge_tat > span").html()),
+                            clinic : $(this).attr('data-clinic'),
+                            daction : $(this).attr('data-action'),
+                        }
+                });
+                jQuery.ajax({
+                type: "POST",
+                url: "<?php echo base_url('/index.php/doctor/ExportToXml'); ?>",
+                data: {data : JSON.stringify(objects), [csrf_name]: csrf_hash},
+                dataType: "json",
+                success: function (response) {
+                    if(response.status === 'success'){
+                        var link = document.createElement("a");
+                        // If you don't know the name or want to use
+                        // the webserver default set name = ''
+                        link.setAttribute('download', '');
+                        link.href = response.xml_link;
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                        jQuery.ajax({
+                            type: "POST",
+                            url: "<?php echo base_url('/index.php/doctor/DeleteXMLGenerated'); ?>",
+                            data: {xmlPath : response.xmlPath},
+                            dataType: "json",
+                            success: function (response) {
+                                
+                            }
+                        });
+                    }else{
+                        jQuery.sticky(response.msg, {classList: 'important', speed: 200, autoclose: 5000});
+                    }
+                }
+            });
+            }
+        });
         //DataTable custom search field
         $('#unpub_custom_filter').on('keyup', function() {
             oTable.search( $(this).val() ).draw();
@@ -4591,8 +4646,28 @@ $('#doctor_record_publish_table').DataTable({
             columns: [0,1,2,3,5]
             }
         },
+        {
+            // extend: 'excelHtml5',
+            text: 'XML',
+            customize: function( xlsx ) {
+                $('.xmlRows').each(function(){
+                    console.log($(this).attr("data-json"));
+                    return false;
+                });
+            }
+        }
         ],
             "bDestroy": true,
+            'createdRow': function( nRow, aData, dataIndex ) {
+                // $(row).attr('id', 'someID');
+                $(nRow).addClass("xmlRows");
+                 $(nRow).attr('data-lab_number', aData[0]);
+                 $(nRow).attr('data-pname', aData[1].replace("<br>", " "));
+                 $(nRow).attr('data-dob', aData[2]);
+                 $(nRow).attr('data-clinic', aData[14]);
+                 $(nRow).attr('data-requested', aData[5]);
+                 $(nRow).attr('data-action', "published");
+            },
                 fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                  $('td', nRow).eq(9).addClass('flag_column');
             },

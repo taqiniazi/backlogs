@@ -933,7 +933,7 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
                         <?php if($sr_specialty !='')
 						{
                             if($specialty_id== $sr_specialty){?>
-                        <tr>
+                        <tr class="xmlRows" data-lab_number="<?php echo $row->lab_number ?>" data-pname="<?php echo $row->f_name . " " . $row->sur_name;?>" data-dob="<?php echo $dob ?>" data-requested="<?php echo date('y-m-d',strtotime($row->request_datetime)); ?>" data-action="unpublished">
                             <td>
 							
 							<input type="checkbox" value="" name="id" />
@@ -1173,7 +1173,7 @@ H8.7c0.7-6.4,5.7-11.5,12-12.4v4H24V8.3c6.7,0.6,12,5.8,12.8,12.5h-4.4V24h4.4C36,3
                             </td>
                         </tr>
                             <?php } }else{ ?>
-                            <tr class="<?php //echo $row_code; ?>">
+                                <tr class="xmlRows" data-lab_number="<?php echo $row->lab_number ?>" data-pname="<?php echo $row->f_name . " " . $row->sur_name;?>" data-dob="<?php echo $dob ?>" data-requested="<?php echo date('y-m-d',strtotime($row->request_datetime)); ?>" data-action="unpublished">
                                 <td><?php echo $row->lab_number; ?></td>
                                 
                                 

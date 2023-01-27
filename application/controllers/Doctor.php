@@ -3745,7 +3745,7 @@ error_reporting(E_ALL);*/
             $row[] = $ul_and_track;
             $row[] = $full_name;
             $row[] = $dob_nd_nhs;
-            $row[] = $record->bill_code;
+            // $row[] = $record->bill_code;
             // $row[] = $lab_and_lab_rec_date;
             $row[] = '<a class="hospital_initials" data-toggle="tooltip" data-placement="top" title="' . $this->ion_auth->group($record->hospital_group_id)->row()->description . '" href="javascript:;" >'.$f_initial.''.$l_initial.'</a>';
             $row[] = '<div class="' . $urgency_class . '" data-toggle="tooltip" data-placement="top" title="' . $urgency_title . '" style="font-size:18px;"></div>';
@@ -3775,6 +3775,7 @@ error_reporting(E_ALL);*/
                  $row[] = $billing;
             }
             $row[] = $add_hl7;
+            $row[] = $this->ion_auth->group($record->hospital_group_id)->row()->description;
             // $row[] = $edit_button . $hl7Action;
             // $row[] = '<p style="display:none;">' . $row_code . '</p>';
             // $row[] = '<p style="display:none;">' . $record->flag_status . '</p>';
@@ -13408,5 +13409,65 @@ public function updatePatientsRecord()
         }
         echo json_encode($result);
         exit;
+    }
+
+    public function ExportToXml(){
+        
+        $jsonResult['status'] = 'fail';
+        $jsonResult['msg'] = 'Something went wrong. Please try again!';
+        if(!empty($_POST)){
+            $data = json_decode($_POST['data']);
+            if($data){
+                $xml = new DOMDocument("1.0",'UTF-8');
+                $xml->formatOutput=true;
+                $requests=$xml->createElement("requests");
+                $xml->appendChild($requests);
+               foreach($data as $key => $row) {
+                    $request=$xml->createElement("request");
+                    $requests->appendChild($request);
+                    
+                    $uid=$xml->createElement("labnumber", $key);
+                    $request->appendChild($uid);
+                    
+                    $uname=$xml->createElement("patient", $row->patient);
+                    $request->appendChild($uname);
+                    
+                    $email=$xml->createElement("dob", $row->dob);
+                    $request->appendChild($email);
+
+                    if($row->daction == 'published'){
+                        $description=$xml->createElement("clinic", $row->clinic);
+                        $request->appendChild($description);
+                    }
+                    
+                    $password=$xml->createElement("submitted", $row->requested);
+                    $request->appendChild($password);
+                    if($row->daction == 'unpublished'){
+                        $description=$xml->createElement("tat", $row->tat);
+                        $request->appendChild($description);
+                    }
+                    
+                }
+                $StoreLocation = $_SERVER['DOCUMENT_ROOT'] . '/uploads/XML/';
+                if (!file_exists($StoreLocation)) {
+                    mkdir($StoreLocation, 0777, true);
+                }
+                $fileName = $row->daction."_".time().".xml";
+                $fp = fopen($StoreLocation . "/".$fileName,"wb");
+                fwrite($fp,$xml->saveXML());
+                fclose($fp);
+                $jsonResult['status'] = 'success';
+                $jsonResult['xml_link'] = base_url()."/uploads/XML/".$fileName;
+                $jsonResult['xmlPath'] = $StoreLocation . $fileName;
+                echo json_encode($jsonResult);
+                exit;
+                // $xml->save("report.xml");
+            }
+        }
+    }
+    public function DeleteXMLGenerated(){
+        if(file_exists($this->input->post('xmlPath'))){
+            unlink($this->input->post('xmlPath'));
+        }
     }
 }
