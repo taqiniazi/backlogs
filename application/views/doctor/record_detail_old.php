@@ -3806,7 +3806,7 @@ $dr_full_name = $Usersgetdatils[0]->first_name . '&nbsp;' . $Usersgetdatils[0]->
  
  
     
-    <div class="tg-haslayout uralensis_icons_actions" id="myHeader">
+    <div class="tg-haslayout uralensis_icons_actions hide" id="myHeader">
         <div class="container-fluid tab-full" style="padding-right: 130px; padding-left: 30px;">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

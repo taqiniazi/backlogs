@@ -642,37 +642,37 @@ if(!empty($javascripts)){
             searching: true,
             processing: true,
             lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-            dom: 'Bfrtip',
-        buttons: [
-        {
-            extend: 'copy',
-            exportOptions: {
-            columns: [0,1,2,3,7]
-            }
-        },
-        {
-            extend: 'csv',
-            exportOptions: {
-            columns: [0,1,2,3,7]
-            }
-        },
-        {
-            extend: 'pdf',
-            exportOptions: {
-            columns: [0,1,2,3,7]
-            }
-        },
-        {
-            // extend: 'excelHtml5',
-            text: 'XML',
-            customize: function( xlsx ) {
-                $('.xmlRows').each(function(){
-                    console.log($(this).attr("data-json"));
-                    return false;
-                });
-            }
-        }
-        ],
+        //     dom: 'Bfrtip',
+        // buttons: [
+        // {
+        //     extend: 'copy',
+        //     exportOptions: {
+        //     columns: [0,1,2,3,7]
+        //     }
+        // },
+        // {
+        //     extend: 'csv',
+        //     exportOptions: {
+        //     columns: [0,1,2,3,7]
+        //     }
+        // },
+        // {
+        //     extend: 'pdf',
+        //     exportOptions: {
+        //     columns: [0,1,2,3,7]
+        //     }
+        // },
+        // {
+        //     // extend: 'excelHtml5',
+        //     text: 'XML',
+        //     customize: function( xlsx ) {
+        //         $('.xmlRows').each(function(){
+        //             console.log($(this).attr("data-json"));
+        //             return false;
+        //         });
+        //     }
+        // }
+        // ],
         });
         $(document).on('click','.dt-button',function(){
             const spanText = $(this).find("span").html();

@@ -1878,7 +1878,7 @@ function getTestAgsinstSubCatCustom($labId='')
 
     if(!empty($labId)){
         $CI = &get_instance();
-        $query = "SELECT * FROM laboratory_tests WHERE lab_id = $labId order by test_order asc";
+        $query = "SELECT * FROM laboratory_tests WHERE lab_id = $labId group by name order by test_order asc";
         $result = $CI->db->query($query)->result_array();
         return $result;
     }else{

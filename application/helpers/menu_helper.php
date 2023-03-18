@@ -84,7 +84,6 @@ if (!function_exists('genMenu')) {
 {
         $ci = & get_instance();
         $ci->load->database();
-
         $userID = $ci->ion_auth->user()->row()->id;
         $ci->db->select(['user_id','group_id']);
         $ci->db->where('user_id',$userID);
@@ -103,6 +102,12 @@ if (!function_exists('genMenu')) {
         $lab_id = $ci->ion_auth->get_users_main_groups()->row()->id; 
         // WHole menu
         $menuArr  = $ci->menuModel->getMenuArray($groupID, $lab_id);
+        $data['controller'] = $ci->uri->segment(1);
+        $data['method'] = $ci->uri->segment(2);
+        if($data['controller'] == 'index.php'){
+            $data['controller'] = $ci->uri->segment(2);
+            $data['methos=d'] = $ci->uri->segment(3);
+        }
         if(!empty($menuArr))
         {
             $data['menuArr'] = $menuArr;

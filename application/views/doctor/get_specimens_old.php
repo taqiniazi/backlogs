@@ -349,7 +349,7 @@ else $disableDiv1 = " ";
                data-target="#add_specimen_modal">
                 <i class="ti-plus"></i>
             </a>
-            <a href="javascript:;" class="tg-detailsicon delete_specimen tg-themeiconcolortwo">
+            <a href="javascript:;" class="tg-detailsicon delete_specimen tg-themeiconcolortwo hide">
                 <i class="ti-trash"></i>
             </a>
         
@@ -694,7 +694,7 @@ else $disableDiv1 = " ";
             </div>
         </div>
 
-        <ul class="tg-themenavtabs nav navbar-nav" style="margin-top: 10px;">
+        <ul class="tg-themenavtabs nav navbar-nav hide" style="margin-top: 10px;">
             <?php
             $active = 'active';
             $count = 1;
@@ -739,7 +739,10 @@ else $disableDiv1 = " ";
                 ?>
                 <div class="tg-navtabsdetails tab-pane fade in <?php echo $tabs_active; ?>"
                      id="tabs_<?php echo $inner_tab_count; ?>">
-                    <form class="tg-formtheme tg-tabform tg-tabformvtwo doctor_update_specimen"
+                     <div class="sec_title form-group" style="font-size:22px !important;">
+                        Specimen <?php echo $inner_tab_count; ?>
+                    </div>
+                    <form class="tg-formtheme tg-tabform tg-tabformvtwo doctor_update_specimen" data-id="<?php echo $inner_tab_count; ?>"
                           id="doctor_update_specimen_record_<?php echo $inner_tab_count; ?>"
                           method="post">
                         <div class="col-md-12 nopadding" style="display: none;">
@@ -956,9 +959,9 @@ else $disableDiv1 = " ";
                                             <div id="" class="">
                                                 <label for="">Specimen Macroscopic Description </label>
                                             </div>
-                                            <textarea name="specimen_macroscopic_description"
+                                            <textarea name="specimen_macroscopic_description" data-id="<?php echo intval($key+1); ?>"
                                                       id="specimen_macroscopic_description_<?php echo intval($key+1); ?>"
-                                                      class="form-control tg-tinymceeditor form-controlactive"
+                                                      class="form-control form-controlactive macroarea"
                                                       placeholder="Macroscopic Description"><?php echo $row->specimen_macroscopic_description; ?></textarea>
                                         </div>
                                         
@@ -969,7 +972,7 @@ else $disableDiv1 = " ";
                         </div>
                         <div class="clearfix"></div>
 
-<div class="col-md-12 nopadding form-group" <?=$disableDiv?>>
+<div class="col-md-12 nopadding form-group hide" <?=$disableDiv?>>
                             <div class="sec_title form-group">
                                 Blocks <a href="javascript:;" class="checv_up_down"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -1017,6 +1020,8 @@ else $disableDiv1 = " ";
                                                             $cnt = 0;
                                                             $list = json_decode(json_encode($specimen_blocks), true);
                                                             $count_speciment_block_tem = array_count_values(array_column($list, 'specimen_id'))[$row->specimen_id];
+                                                            // echo "<pre>";
+                                                            // print_r($specimen_blocks);die;
                                                             foreach ($specimen_blocks as $key => $sp_block) {
                                                                 if ($sp_block->specimen_id == $row->specimen_id) {
                                                                     $cnt++;
@@ -1132,7 +1137,7 @@ else $disableDiv1 = " ";
                         
 
                         
-                        <div class="col-md-12 nopadding" <?=$disableDiv?>>
+                        <div class="col-md-12 nopadding hide" <?=$disableDiv?>>
                             <div class="sec_title form-group">
                                 Virtual Slide Panel <a href="javascript:;" class="checv_up_down"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -1379,7 +1384,7 @@ else $disableDiv1 = " ";
                                                             Lab Number: <strong><?php echo $row->lab_number; ?></strong>
                                                         </span>
                                                     </div>
-                                          <textarea class="tg-tinymceeditor specimen_microscopic_description" name="specimen_microscopic_description" id="specimen_microscopic_description_<?php echo $inner_tab_count; ?>" placeholder="Microscopic Description" style="min-height:350px;"><?php echo trim($row->specimen_microscopic_description); ?></textarea>
+                                          <textarea class="specimen_microscopic_description microarea" data-id="<?php echo $inner_tab_count; ?>" name="specimen_microscopic_description" id="specimen_microscopic_description_<?php echo $inner_tab_count; ?>" placeholder="Microscopic Description" style="min-height:350px;"><?php echo trim($row->specimen_microscopic_description); ?></textarea>
                                                               
                                                 </div>
                                             </fieldset>
@@ -1684,7 +1689,7 @@ else $disableDiv1 = " ";
 
 
 
-                        <div class="col-md-12 nopadding" <?=$disableDiv?>>
+                        <div class="col-md-12 nopadding hide" <?=$disableDiv?>>
                             <div class="sec_title form-group">
                                 Diagnosis: <span class="text-danger">*</span> <a href="javascript:;"
                                                                                  class="checv_up_down"><i
@@ -2701,7 +2706,8 @@ else $disableDiv1 = " ";
                                 }
                                 return tab_value;
                             }
-                        function save_specimen_data(){
+                        function save_specimen_data(row){
+                            console.log($(row).parent().html());
                                 /*let flag = true;
                                 jQuery(document).find('.ds_click').each(function(i){
                                     if(jQuery(this).hasClass('active')){
@@ -2753,37 +2759,37 @@ else $disableDiv1 = " ";
                                     }
                                 })
                             <?php } ?>
-                            tinymce.init({
-                                menubar: false,
-                                selector: '.tg-tinymceeditor',
-                                init_instance_callback: function (editor) {
-                                    editor.on('blur', function (e) {
-                                        save_specimen_data();
-                                    });
-                                },
-                                toolbar: 'undo redo ' +
-                                    'bold italic backcolor | alignleft aligncenter ' +
-                                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                                    'removeformat | help',
-                                font_formats: "CircularStd=CircularStd;",
-                                content_style: "@import url('https://db.onlinewebfonts.com/c/860c3ec7bbc5da3e97233ccecafe512e?family=CircularStd'); body { font-family: 'CircularStd' , sans-serif !important; font-size:18px; }"
-                            });
+                            // tinymce.init({
+                            //     menubar: false,
+                            //     selector: '.tg-tinymceeditor',
+                            //     init_instance_callback: function (editor) {
+                            //         editor.on('blur', function (e) {
+                            //             save_specimen_data(this);
+                            //         });
+                            //     },
+                            //     toolbar: 'undo redo ' +
+                            //         'bold italic backcolor | alignleft aligncenter ' +
+                            //         'alignright alignjustify | bullist numlist outdent indent | ' +
+                            //         'removeformat | help',
+                            //     font_formats: "CircularStd=CircularStd;",
+                            //     content_style: "@import url('https://db.onlinewebfonts.com/c/860c3ec7bbc5da3e97233ccecafe512e?family=CircularStd'); body { font-family: 'CircularStd' , sans-serif !important; font-size:18px; }"
+                            // });
 
-                            tinymce.init({
-                                selector: '.tinyTextarea',
-                                height: 200,
-                                menubar: false,
-                                plugins: [
-                                    'advlist autolink lists link image charmap print preview anchor',
-                                    'searchreplace visualblocks code fullscreen',
-                                    'insertdatetime media table paste code help wordcount'
-                                ],
-                                toolbar: 'undo redo | formatselect | ' +
-                                    'bold italic backcolor | alignleft aligncenter ' +
-                                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                                    'removeformat | help',
-                                content_css: '//www.tiny.cloud/css/codepen.min.css'
-                            });
+                            // tinymce.init({
+                            //     selector: '.tinyTextarea',
+                            //     height: 200,
+                            //     menubar: false,
+                            //     plugins: [
+                            //         'advlist autolink lists link image charmap print preview anchor',
+                            //         'searchreplace visualblocks code fullscreen',
+                            //         'insertdatetime media table paste code help wordcount'
+                            //     ],
+                            //     toolbar: 'undo redo | formatselect | ' +
+                            //         'bold italic backcolor | alignleft aligncenter ' +
+                            //         'alignright alignjustify | bullist numlist outdent indent | ' +
+                            //         'removeformat | help',
+                            //     content_css: '//www.tiny.cloud/css/codepen.min.css'
+                            // });
 
                             //var tabFlag = true;
                             var inner_tab_select = 1;
@@ -2983,10 +2989,18 @@ else $disableDiv1 = " ";
                                 e.stopImmediatePropagation();
                                 jQuery(document).find('#doctor_update_specimen_record_'+ $(this).attr("data-key")).submit();
                             });
+                            jQuery(document).find('.macroarea').on('change', function (e) {
+                                e.stopImmediatePropagation();
+                                jQuery(document).find('#doctor_update_specimen_record_'+ $(this).attr("data-id")).submit();
+                            });
+                            jQuery(document).find('.microarea').on('change', function (e) {
+                                e.stopImmediatePropagation();
+                                jQuery(document).find('#doctor_update_specimen_record_'+ $(this).attr("data-id")).submit();
+                            });
 
                             jQuery(document).find('.dusrd').on('select2:select, focusout, change', function (e) {
                                 e.preventDefault();
-                                save_specimen_data();
+                                save_specimen_data(this);
                             });
                             /*jQuery(document).find('#doctor_update_specimen_record_'+inner_tab_select).find('.dusrd').on('change', function (e){
                                 e.preventDefault();
@@ -3012,9 +3026,8 @@ else $disableDiv1 = " ";
                                 },1000);
 
                             });
-
+                            
                             jQuery('#doctor_update_specimen_record_<?php echo $inner_tab_count; ?>').on('submit', function (e) {
-                                
                                 e.preventDefault();
                                 var _this = jQuery(this);
 
@@ -3215,7 +3228,7 @@ else $disableDiv1 = " ";
                     </script>
                 </div>
                 <?php
-                $tabs_active = '';
+                // $tabs_active = '';
                 $inner_tab_count++;
             }
             ?>
